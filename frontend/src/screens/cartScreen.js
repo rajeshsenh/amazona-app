@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox';
 
 export default function CartScreen(props) {
@@ -18,12 +18,12 @@ export default function CartScreen(props) {
     }, [dispatch, productId, qty]);
 
     const removeFromCartHandler = (id) => {
-        // delete action
+        dispatch(removeFromCart(id));
     };
 
     const checkoutHandler = () => {
         props.history.push('/signin?redirect=shipping');
-    }
+    };
 
     return (
         <div className='row top'>
@@ -88,7 +88,12 @@ export default function CartScreen(props) {
                             </h2>
                         </li>
                         <li>
-                            <button type="button" onClick={checkoutHandler} className="primary block" disable={cartItems.length === 0}>
+                            <button
+                                type='button'
+                                onClick={checkoutHandler}
+                                className='primary block'
+                                disable={(cartItems.length === 0).toString()}
+                            >
                                 Proceed to Checout
                             </button>
                         </li>
