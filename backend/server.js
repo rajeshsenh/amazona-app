@@ -4,14 +4,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(
-    'mongodb://127.0.0.1:27017/amazona',
+    process.env.MONGO_URI,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -26,7 +30,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
-
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
