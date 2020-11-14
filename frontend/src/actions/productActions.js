@@ -15,8 +15,8 @@ export const listProducts = () => async (dispatch) => {
     try {
         const { data } = await Axios.get('/api/products');
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-    } catch (err) {
-        dispatch({ type: PRODUCT_LIST_FAIL, payload: err.message });
+    } catch (error) {
+        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
     }
 };
 
@@ -25,11 +25,11 @@ export const detailsProduct = (productId) => async (dispatch) => {
     try {
         const { data } = await Axios.get(`/api/products/${productId}`);
         dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
-    } catch (err) {
+    } catch (error) {
         dispatch({
             type: PRODUCT_DETAILS_FAIL,
             payload:
-                err.response && err.response.data.message ? err.response.data.message : err.message,
+            error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }
 };
