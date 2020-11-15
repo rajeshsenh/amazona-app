@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
 const dotenv = require('dotenv');
+const orderRouter = require('./routers/orderRouter');
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });

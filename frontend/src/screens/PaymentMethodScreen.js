@@ -29,7 +29,7 @@ export default function PaymentMethodScreen(props) {
                         <input
                             type='radio'
                             id='paypal'
-                            value='PayPal'
+                            value={paymentMethod}
                             name='paymentMethod'
                             required
                             checked
@@ -43,7 +43,7 @@ export default function PaymentMethodScreen(props) {
                         <input
                             type='radio'
                             id='stripe'
-                            value='Stripe'
+                            value={paymentMethod}
                             name='paymentMethod'
                             required
                             onChange={(e) => setPaymentMethod(e.target.value)}
