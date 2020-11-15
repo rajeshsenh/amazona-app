@@ -13,7 +13,7 @@ orderRouter.post(
             res.status(400).send({ message: 'Cart is empty' });
         } else {
             const order = new Order({
-                orderITems: req.body.orderItems,
+                orderItems: req.body.orderItems,
                 shippingAddress: req.body.shippingAddress,
                 paymentMethod: req.body.paymentMethod,
                 itemsPrice: req.body.itemsPrice,
@@ -27,5 +27,14 @@ orderRouter.post(
         }
     })
 );
+
+orderRouter.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
+    const  order = await Order.findById(req.params.id);
+    if(order) {
+        res.send(order);
+    } else {
+        res.status(404).send({message: "Order not found"})
+    }
+}))
 
 module.exports = orderRouter;
