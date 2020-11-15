@@ -9,6 +9,7 @@ import signinScreen from './screens/signinScreen';
 import { signout } from './actions/userActions';
 import RegisterScreen from './screens/registerScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import PaymentMethodScreen from './screens/PaymentMethodScreen';
 
 export default function App() {
     const dispatch = useDispatch();
@@ -58,6 +59,7 @@ export default function App() {
                     <Route path='/signin' component={signinScreen} exact />
                     <Route path='/register' component={RegisterScreen} exact />
                     <Route path='/shipping' component={ShippingAddressScreen} exact />
+                    <Route path='/payment' component={PaymentMethodScreen} exact />
                 </main>
                 <footer className='row center'>All right reserved</footer>
             </div>
